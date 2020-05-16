@@ -66,7 +66,7 @@ namespace ScrapBot.Commands
                                    EmbedColor.Leaderboard);
         }
 
-        [Command("TeamSeasonWins", "TeamSeasonWin", "TeamSeasonW", "TeamSW", "TSWin", "TSW")]
+        [Command("TeamSeasonWins", "TeamSeasonWin", "TeamSeasonW", "TeamWins", "TeamWin", "TeamSW", "TSWin", "TSW")]
         [Description("Get the Team Season Win Leaderboard")]
         public async Task TeamwinLeaderboardAsync()
         {
