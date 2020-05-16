@@ -1,0 +1,8 @@
+{
+  "prefix": "D!",
+  "tokens": {
+    "bot": "AddYourBotTokenHere"
+  },
+  "scrapApi": "AddAPIToken",
+  "errorLogChannel": 123
+}
