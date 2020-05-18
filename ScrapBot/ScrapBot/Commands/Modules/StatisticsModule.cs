@@ -77,7 +77,7 @@ namespace ScrapBot.Commands
 
             var result = await Interactivity.SendSelectionAsync(selection, Context.Channel);
 
-            if (result.IsCancelled)
+            if (result.IsCancelled || result.IsTimeouted)
             {
                 return;
             }
