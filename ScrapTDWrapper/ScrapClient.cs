@@ -20,7 +20,7 @@ namespace ScrapTDWrapper
         public ScrapClient(string apiKey)
         {
             var endPoint = new IPEndPoint(IPAddress.Parse("176.9.99.146"), 34889);
-            Client = new SocketClient(this, endPoint, apiKey, 20);
+            Client = new SocketClient(this, endPoint, apiKey, 180);
         }
 
         public async Task StartAsync()

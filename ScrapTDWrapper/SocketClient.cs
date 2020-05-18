@@ -80,12 +80,10 @@ namespace ScrapTDWrapper
             {
                 await RequestSemaphore.WaitAsync();
 
-                Disconnect(); //Required because of a server bug! Remove when server fixed!
-                await ConnectAsync();
-                //await CheckConnectionStatusAsync();
+                await CheckConnectionStatusAsync();
 
                 await Writer.WriteLineAsync("keepalive");
-                await CheckServerResponseAsync();
+                await CheckServerResponseAsync(); 
                 await CheckServerResponseAsync();
             }
             finally
@@ -102,13 +100,13 @@ namespace ScrapTDWrapper
             switch (response)
             {
                 case "AA":
-                    return;
+                    break;
                 case "EE":
                     throw new Exception("The server responded with EE (Error)!");
                 case "LL":
-                    Console.WriteLine("The server responded with LL (Rate Limit Reached)");
-                    return;
-                    //throw new Exception("The server responded with LL (Rate Limit Reached)");
+                    throw new Exception("The server responded with LL (Rate Limit Reached)");
+                default:
+                    throw new Exception($"Something went wrong! The server response was {response}");
             }
         }
         private async Task WaitForDataAsync(int timeout)
@@ -323,7 +321,7 @@ namespace ScrapTDWrapper
 
                 await CheckConnectionStatusAsync();
 
-                await Writer.WriteLineAsync("seasonwinleaderboard ");
+                await Writer.WriteLineAsync("seasonwinleaderboard");
 
                 await CheckServerResponseAsync();
 
