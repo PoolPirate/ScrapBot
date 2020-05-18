@@ -45,8 +45,8 @@ namespace ScrapBot
             ScrapClient = new ScrapClient(Config["scrapApi"]);
             Provider = MakeProvider();
 
-            await InitializeServicesAsync();
             await ScrapClient.StartAsync();
+            await InitializeServicesAsync();
 
             CommandService.AddModules(Assembly.GetEntryAssembly());
             InitializeTypeParsers();
