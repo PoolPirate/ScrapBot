@@ -14,8 +14,8 @@ namespace ScrapBot.Commands
         }
 
         public override ValueTask<CheckResult> CheckAsync(CommandContext context)
-        => CheckAsync(context as ScapContext);
+        => CheckAsync(context as ScrapContext);
 
-        public abstract ValueTask<CheckResult> CheckAsync(ScapContext context);
+        public abstract ValueTask<CheckResult> CheckAsync(ScrapContext context);
     }
 }

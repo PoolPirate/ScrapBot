@@ -52,7 +52,7 @@ namespace ScrapBot.Extensions
             return builder.Build();
         }
 
-        public static async Task<bool> RunHardChecksAsync(this Command command, ScapContext context)
+        public static async Task<bool> RunHardChecksAsync(this Command command, ScrapContext context)
         {
             var checks = command.Checks
                 .Where(x => x is HardCheckAttribute)
@@ -63,7 +63,7 @@ namespace ScrapBot.Extensions
             return !checkResults.Any(x => !x.IsSuccessful);
         }
 
-        public static async Task<bool> RunSoftChecksAsync(this Command command, ScapContext context)
+        public static async Task<bool> RunSoftChecksAsync(this Command command, ScrapContext context)
         {
             var checks = command.Checks
                 .Where(x => x is SoftCheckAttribute)

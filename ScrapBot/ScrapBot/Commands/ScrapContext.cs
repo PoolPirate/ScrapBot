@@ -4,7 +4,7 @@ using Qmmands;
 
 namespace ScrapBot.Commands
 {
-    public class ScapContext : CommandContext
+    public class ScrapContext : CommandContext
     {
         public SocketTextChannel Channel { get; }
         public DiscordShardedClient Client { get; }
@@ -12,7 +12,7 @@ namespace ScrapBot.Commands
         public SocketUserMessage Message { get; }
         public SocketUser User { get; }
 
-        public ScapContext(DiscordShardedClient client, SocketUserMessage msg, IServiceProvider provider)
+        public ScrapContext(DiscordShardedClient client, SocketUserMessage msg, IServiceProvider provider)
             : base(provider)
         {
             Client = client;

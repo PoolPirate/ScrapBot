@@ -43,7 +43,7 @@ namespace ScrapBot.Services
                 return;
             }
 
-            var context = new ScapContext(client, message as SocketUserMessage, provider);
+            var context = new ScrapContext(client, message as SocketUserMessage, provider);
             var result = await commands.ExecuteAsync(output, context);
 
             if (!(result is FailedResult failedResult))
@@ -66,7 +66,7 @@ namespace ScrapBot.Services
 
         private async Task CommandExecutionFailedAsync(CommandExecutionFailedEventArgs args)
         {
-            var ctx = args.Context as ScapContext;
+            var ctx = args.Context as ScrapContext;
 
             if (args.Result.Exception != null)
             {

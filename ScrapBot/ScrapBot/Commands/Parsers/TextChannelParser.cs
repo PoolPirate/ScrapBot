@@ -8,7 +8,7 @@ namespace ScrapBot.Commands
 {
     public sealed class TextChannelParser : ScrapTypeParser<ITextChannel>
     {
-        public override ValueTask<TypeParserResult<ITextChannel>> ParseAsync(Parameter param, string value, ScapContext context)
+        public override ValueTask<TypeParserResult<ITextChannel>> ParseAsync(Parameter param, string value, ScrapContext context)
         {
             var channels = context.Guild.Channels.OfType<ITextChannel>().ToList();
             ITextChannel channel = null;

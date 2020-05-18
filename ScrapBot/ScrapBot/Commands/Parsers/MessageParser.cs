@@ -8,7 +8,7 @@ namespace ScrapBot.Commands
 {
     public class MessageParser : ScrapTypeParser<IMessage>
     {
-        public override async ValueTask<TypeParserResult<IMessage>> ParseAsync(Parameter parameter, string value, ScapContext context)
+        public override async ValueTask<TypeParserResult<IMessage>> ParseAsync(Parameter parameter, string value, ScrapContext context)
         {
             var messages = context.Channel.CachedMessages;
             IMessage message = null;

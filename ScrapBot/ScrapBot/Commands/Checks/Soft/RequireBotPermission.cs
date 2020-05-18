@@ -24,7 +24,7 @@ namespace ScrapBot.Commands
             GuildPermission = null;
         }
 
-        public override ValueTask<CheckResult> CheckAsync(ScapContext context)
+        public override ValueTask<CheckResult> CheckAsync(ScrapContext context)
         {
             IGuildUser guildUser = context.Guild.CurrentUser;
 

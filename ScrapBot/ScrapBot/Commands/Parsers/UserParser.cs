@@ -9,7 +9,7 @@ namespace ScrapBot.Commands
 {
     public sealed class UserParser : ScrapTypeParser<IUser>
     {
-        public override ValueTask<TypeParserResult<IUser>> ParseAsync(Parameter param, string value, ScapContext context)
+        public override ValueTask<TypeParserResult<IUser>> ParseAsync(Parameter param, string value, ScrapContext context)
         {
             var users = context.Guild.Users.OfType<IUser>().ToList();
             IUser user = null;

@@ -7,7 +7,7 @@ namespace ScrapBot.Commands
 {
     public class CommandParser : ScrapTypeParser<Command>
     {
-        public override ValueTask<TypeParserResult<Command>> ParseAsync(Parameter parameter, string value, ScapContext context)
+        public override ValueTask<TypeParserResult<Command>> ParseAsync(Parameter parameter, string value, ScrapContext context)
         {
             var _commands = context.ServiceProvider.GetService<CommandService>();
 

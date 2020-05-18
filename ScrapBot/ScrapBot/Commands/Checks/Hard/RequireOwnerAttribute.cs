@@ -6,7 +6,7 @@ namespace ScrapBot.Commands
     [Description("Requires the bot owner to run the command")]
     public class RequireOwnerAttribute : HardCheckAttribute
     {
-        public override async ValueTask<CheckResult> CheckAsync(ScapContext context)
+        public override async ValueTask<CheckResult> CheckAsync(ScrapContext context)
         {
             var appInfo = await context.Client.GetApplicationInfoAsync();
 

@@ -8,7 +8,7 @@ namespace ScrapBot.Commands
 {
     public sealed class RoleParser : ScrapTypeParser<IRole>
     {
-        public override ValueTask<TypeParserResult<IRole>> ParseAsync(Parameter param, string value, ScapContext context)
+        public override ValueTask<TypeParserResult<IRole>> ParseAsync(Parameter param, string value, ScrapContext context)
         {
             var roles = context.Guild.Roles.ToList();
             IRole role = null;

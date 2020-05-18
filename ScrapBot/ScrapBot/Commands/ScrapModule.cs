@@ -6,7 +6,7 @@ using ScrapBot.Utils;
 
 namespace ScrapBot.Commands
 {
-    public abstract class ScrapModule : ModuleBase<ScapContext>
+    public abstract class ScrapModule : ModuleBase<ScrapContext>
     {
         private Task<RestUserMessage> ConstructionMessageTask { get; set; }
 

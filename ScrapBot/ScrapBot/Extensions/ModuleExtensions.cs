@@ -7,7 +7,7 @@ namespace ScrapBot.Extensions
 {
     public static partial class Extensions
     {
-        public static async Task<bool> RunHardChecksAsync(this Module module, ScapContext context)
+        public static async Task<bool> RunHardChecksAsync(this Module module, ScrapContext context)
         {
             var checks = module.Checks
                 .Where(x => x is HardCheckAttribute)
@@ -18,7 +18,7 @@ namespace ScrapBot.Extensions
             return !checkResults.Any(x => !x.IsSuccessful);
         }
 
-        public static async Task<bool> RunSoftChecksAsync(this Module module, ScapContext context)
+        public static async Task<bool> RunSoftChecksAsync(this Module module, ScrapContext context)
         {
             var checks = module.Checks
                 .Where(x => x is SoftCheckAttribute)
