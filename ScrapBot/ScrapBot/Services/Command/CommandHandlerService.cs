@@ -29,7 +29,7 @@ namespace ScrapBot.Services
 
         private async Task HandleMessageAsync(SocketMessage message)
         {
-            if (!CommandUtilities.HasPrefix(message.Content, config["prefix"], out string output))
+            if (!CommandUtilities.HasPrefix(message.Content, config["prefix"], StringComparison.OrdinalIgnoreCase, out string output))
             {
                 return;
             }
