@@ -67,6 +67,7 @@ namespace ScrapBot
         {
             CommandService.AddTypeParser(new UserParser());
             CommandService.AddTypeParser(new TextChannelParser());
+            CommandService.AddTypeParser(new CommandParser());
         }
 
         private IServiceProvider MakeProvider()

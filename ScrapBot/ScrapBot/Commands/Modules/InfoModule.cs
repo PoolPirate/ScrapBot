@@ -34,7 +34,7 @@ namespace ScrapBot.Commands
         [Command("CommandHelp", "CommandInfo", "CmdInfo", "Help", "CmdHelp", "CInfo", "CHelp", "HelpMe", "HowDoesThisWork")]
         [Description("Get help about a certain command")]
         [Priority(1)]
-        public Task SendCommandHelpAsync([Name("Command")] Command command)
+        public Task SendCommandHelpAsync([Name("Command")][Remainder] Command command)
             => ReplyAsync(embed: command.GetHelpEmbed());
 
         [Command("Help", "HelpMe", "HowDoesThisWork")]
