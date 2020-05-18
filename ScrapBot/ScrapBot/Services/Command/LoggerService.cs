@@ -1,23 +1,45 @@
 ﻿using System;
 using System.Threading.Tasks;
+using System.Timers;
 using Discord;
 using Discord.WebSocket;
 using Microsoft.Extensions.Configuration;
 using ScrapBot.Utils;
+using ScrapTDWrapper;
 
 namespace ScrapBot.Services
 {
     public sealed class LoggerService : ScrapService
     {
 #pragma warning disable
-        [Inject] private readonly DiscordShardedClient client;
-        [Inject] private readonly IConfiguration config;
+        [Inject] private readonly DiscordShardedClient Client;
+        [Inject] private readonly IConfiguration Config;
+        [Inject] private readonly ScrapClient ScrapClient;
 #pragma warning restore
+
+        private readonly Timer LogApiCountersTimer;
+
+        public LoggerService()
+        {
+            LogApiCountersTimer = new Timer(60000)
+            {
+                AutoReset = true,
+                Enabled = true
+            };
+        }
 
         public override Task InitializeAsync()
         {
-            client.Log += LogAsync;
-            return base.InitializeAsync();
+            Client.Log += LogAsync;
+            LogApiCountersTimer.Elapsed += (e, sender) => Task.Run(() => LogApiCountersAsync());
+            return LogApiCountersAsync();
+        }
+
+        public async Task LogApiCountersAsync()
+        {
+            var message = new LogMessage(LogSeverity.Info, "ScrapWrapper", 
+                                         $"Api calls today: {ScrapClient.DailyRequestCount}, Total Api calls: {ScrapClient.TotalRequestCount}");
+            await LogAsync(message);
         }
 
         public Task LogAsync(LogMessage arg)
@@ -32,13 +54,12 @@ namespace ScrapBot.Services
                 LogSeverity.Debug => ConsoleColor.Gray,
                 _ => ConsoleColor.Green,
             };
-            Console.WriteLine(arg.ToString(builder: null));
-            return Task.CompletedTask;
+            return Console.Out.WriteLineAsync(arg.ToString());
         }
 
         public async Task ReportErrorAsync(SocketMessage msg, Exception ex)
         {
-            var errorLogChannel = client.GetChannel(ulong.Parse(config["errorLogChannel"])) as ISocketMessageChannel;
+            var errorLogChannel = Client.GetChannel(ulong.Parse(Config["errorLogChannel"])) as ISocketMessageChannel;
             await errorLogChannel.SendMessageAsync(embed: EmbedUtils.Exception(msg, ex));
 
             await msg.Channel.SendMessageAsync(embed: EmbedUtils.Sorry);

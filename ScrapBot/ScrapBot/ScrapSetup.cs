@@ -21,7 +21,6 @@ namespace ScrapBot
         public CommandService CommandService { get; private set; }
         public ScrapClient ScrapClient { get; private set; }
         public IServiceProvider Provider { get; private set; }
-        public LoggerService Logger { get; private set; }
 
         public async Task InitializeAsync()
         {
@@ -45,12 +44,9 @@ namespace ScrapBot
             Config = MakeConfig();
             ScrapClient = new ScrapClient(Config["scrapApi"]);
             Provider = MakeProvider();
-            Logger = Provider.GetService<LoggerService>();
+
             await InitializeServicesAsync();
             await ScrapClient.StartAsync();
-
-            var message = new LogMessage(LogSeverity.Info, "ScrapWrapper", $"Api calls today: {ScrapClient.DailyRequestCount}, Total Api calls: {ScrapClient.TotalRequestCount}");
-            await Logger.LogAsync(message);
 
             CommandService.AddModules(Assembly.GetEntryAssembly());
             InitializeTypeParsers();
