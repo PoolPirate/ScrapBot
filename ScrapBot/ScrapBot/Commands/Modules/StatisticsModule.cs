@@ -131,14 +131,23 @@ namespace ScrapBot.Commands
                 var groups = allMembers.GroupBy(x => x.Rank);
 
                 var leader = groups.Where(x => x.Key == Rank.Leader).First().First();
-                var coLeaders = groups.Where(x => x.Key == Rank.Coleader).First().OrderByDescending(x => x.Trophies).ToArray();
-                var elders = groups.Where(x => x.Key == Rank.Elder).First().OrderByDescending(x => x.Trophies).ToArray();
-                var members = groups.Where(x => x.Key == Rank.Member).First().OrderByDescending(x => x.Trophies).ToArray();
-
                 pages.Add(PageUtils.LeaderPage(team, leader));
-                pages.AddRange(coLeaders.Chunk(10).Select(x => PageUtils.CoLeaderPage(team, x.ToArray())));
-                pages.AddRange(elders.Chunk(10).Select(x => PageUtils.ElderPage(team, x.ToArray())));
-                pages.AddRange(members.Chunk(10).Select(x => PageUtils.MemberPage(team, x.ToArray())));
+
+                if (groups.Where(x => x.Key == Rank.Coleader).Any())
+                {
+                    var coLeaders = groups.Where(x => x.Key == Rank.Coleader).First().OrderByDescending(x => x.Trophies).ToArray();
+                    pages.AddRange(coLeaders.Chunk(10).Select(x => PageUtils.CoLeaderPage(team, x.ToArray())));
+                }
+                if (groups.Where(x => x.Key == Rank.Elder).Any())
+                {
+                    var elders = groups.Where(x => x.Key == Rank.Elder).First().OrderByDescending(x => x.Trophies).ToArray();
+                    pages.AddRange(elders.Chunk(10).Select(x => PageUtils.ElderPage(team, x.ToArray())));
+                }
+                if (groups.Where(x => x.Key == Rank.Member).Any())
+                {
+                    var members = groups.Where(x => x.Key == Rank.Member).First().OrderByDescending(x => x.Trophies).ToArray();
+                    pages.AddRange(members.Chunk(10).Select(x => PageUtils.MemberPage(team, x.ToArray())));
+                }
 
                 var paginator = new StaticPaginatorBuilder()
                     .WithDefaultEmotes()
