@@ -13,7 +13,7 @@ namespace ScrapBot.Extensions
         public static string GetUsageMessage(this Command command)
         {
             var builder = new StringBuilder()
-                .Append($"{command.Name}");
+                .Append($"**{command.Name}**");
 
             foreach (var parameter in command.Parameters)
             {
