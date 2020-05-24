@@ -11,6 +11,16 @@ namespace ScrapBot.Utils
 {
     public static class EmbedUtils
     {
+        public static Embed Invite
+            => new EmbedBuilder()
+                .WithColor(EmbedColor.Info)
+                .WithTitle("Invites")
+                .AddField("Add me to your server", "https://discord.com/oauth2/authorize?client_id=512218279071186955&scope=bot&permissions=67202048")
+                .AddField("Official Scrap Discord", "https://discord.gg/xu9NUcv")
+                .AddField("ScrapTD Community Discord", "https://discord.gg/pEYP3KZ")
+                .AddField("Suggestions / Bug Reports", "https://discord.gg/YzEuqpk")
+                .Build();
+
         public static Embed ReloadComplete
             => new EmbedBuilder()
                 .WithColor(EmbedColor.Info)

@@ -31,6 +31,11 @@ namespace ScrapBot.Commands
             await ReplyAsync(embed: EmbedUtils.ReloadComplete);
         }
 
+        [Command("Invite")]
+        [Description("Take a look at the credits and the bot invite link")]
+        public Task InviteAsync()
+            => ReplyAsync(embed: EmbedUtils.Invite);
+
         [Command("CommandHelp", "CommandInfo", "CmdInfo", "Help", "CmdHelp", "CInfo", "CHelp", "HelpMe", "HowDoesThisWork")]
         [Description("Get help about a certain command")]
         [Priority(1)]
