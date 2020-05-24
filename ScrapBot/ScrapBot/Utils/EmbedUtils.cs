@@ -45,7 +45,7 @@ namespace ScrapBot.Utils
                 .WithTitle("Sorry, I do not support this environment!")
                 .WithDescription("Please use a channel in a server.\n" +
                                  "If you dont have access to a server with me join the official scrap discord:\n" +
-                                 "https://discord.gg/W3d9Jvx")
+                                 "https://discord.gg/xu9NUcv")
                 .WithColor(Color.Red)
                 .Build();
 
