@@ -1,7 +1,7 @@
 ﻿using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.Extensions.DependencyInjection;
 using Qmmands;
-using ScrapBot.Extensions;
 
 namespace ScrapBot.Commands
 {

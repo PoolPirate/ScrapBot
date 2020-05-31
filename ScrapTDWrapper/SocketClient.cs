@@ -83,7 +83,7 @@ namespace ScrapTDWrapper
                 await CheckConnectionStatusAsync();
 
                 await Writer.WriteLineAsync("keepalive");
-                await CheckServerResponseAsync(); 
+                await CheckServerResponseAsync();
                 await CheckServerResponseAsync();
             }
             finally

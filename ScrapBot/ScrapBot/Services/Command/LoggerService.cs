@@ -37,7 +37,7 @@ namespace ScrapBot.Services
 
         public async Task LogApiCountersAsync()
         {
-            var message = new LogMessage(LogSeverity.Info, "ScrapWrapper", 
+            var message = new LogMessage(LogSeverity.Info, "ScrapWrapper",
                                          $"Api calls today: {ScrapClient.DailyRequestCount}, Total Api calls: {ScrapClient.TotalRequestCount}");
             await LogAsync(message);
         }
