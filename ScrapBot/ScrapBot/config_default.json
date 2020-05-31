@@ -4,5 +4,8 @@
     "bot": "AddYourBotTokenHere"
   },
   "scrapApi": "AddAPIToken",
-  "errorLogChannel": 123
+  "errorLogChannel": 123,
+  "ConnectionStrings": {
+    "Remote": ""
+  }
 }

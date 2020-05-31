@@ -1,14 +1,17 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
 using Discord;
 using Discord.WebSocket;
 using Interactivity;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Qmmands;
 using ScrapBot.Commands;
+using ScrapBot.Entities;
 using ScrapBot.Services;
 using ScrapTDWrapper;
 
@@ -78,6 +81,11 @@ namespace ScrapBot
                 .AddSingleton(Config)
                 .AddSingleton(new InteractivityService(Client, TimeSpan.FromMinutes(2)))
                 .AddSingleton(ScrapClient);
+
+            services.AddDbContext<ScrapDbContext>(options =>
+            {
+                options.UseNpgsql(Config.GetConnectionString("Remote"));
+            });
 
             foreach (var type in GetServiceTypes())
             {

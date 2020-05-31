@@ -9,6 +9,11 @@ namespace ScrapBot.Utils
 {
     public static class PageUtils
     {
+        public static PageBuilder CompactDisplay
+            => new PageBuilder()
+                .WithColor(EmbedColor.Info)
+                .WithTitle("Use compact Display?");
+
         public static PageBuilder LeaderBoardPage<T>(IEnumerable<T> values, int index, Func<T, string> nameSelector, Func<T, string> valueSelector,
                                                      string entityName, string valueName, Color color)
         {

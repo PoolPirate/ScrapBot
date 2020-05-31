@@ -4,6 +4,7 @@ using Qmmands;
 
 namespace ScrapBot.Commands
 {
+    [Description("Requires a specific group of users")]
     public class RequireUserAttribute : HardCheckAttribute
     {
         public ulong[] UserIds { get; set; }
@@ -13,11 +14,9 @@ namespace ScrapBot.Commands
             UserIds = userIds;
         }
 
-        public override ValueTask<CheckResult> CheckAsync(ScrapContext context)
-        {
-            return UserIds.Contains(context.User.Id)
+        public override ValueTask<CheckResult> CheckAsync(ScrapContext context) 
+            => UserIds.Contains(context.User.Id)
                 ? CheckResult.Successful
                 : CheckResult.Unsuccessful("You do not have access to this command!");
-        }
     }
 }
