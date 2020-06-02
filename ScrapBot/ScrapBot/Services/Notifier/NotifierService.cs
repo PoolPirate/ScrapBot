@@ -48,7 +48,7 @@ namespace ScrapBot.Services
                 var user = await Client.Shards.First().Rest.GetUserAsync(notifier.DiscordId);
                 var channel = await user.GetOrCreateDMChannelAsync();
 
-                notifier.NextTrigger = DateTimeOffset.UtcNow + notifier.Interval;
+                notifier.NextTrigger = notifier.NextTrigger + notifier.Interval;
                 notifier.TriggerCount++;
 
                 await SendLeaderboardsAsync(channel, notifier.Type);

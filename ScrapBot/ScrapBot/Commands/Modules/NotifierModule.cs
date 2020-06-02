@@ -19,6 +19,7 @@ namespace ScrapBot.Commands
         public InteractivityService Interactivity { get; set; }
 
         [Command("Notify", "N")]
+        [Description("Create a notifier")]
         [RequireBotPermission(ChannelPermission.ManageMessages | ChannelPermission.AddReactions)]
         public async Task CreateNotifierAsync()
         {
