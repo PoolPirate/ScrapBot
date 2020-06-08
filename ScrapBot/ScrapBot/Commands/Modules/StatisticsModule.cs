@@ -66,8 +66,10 @@ namespace ScrapBot.Commands
                 return;
             }
 
+            var sortedPlayers = players.OrderBy(x => x.Name).ToList();
+
             var selection = new MessageSelectionBuilder<Player>()
-                                .WithValues(players.Take(10).ToArray())
+                                .WithValues(sortedPlayers.Take(12).ToArray())
                                 .WithUsers(Context.User)
                                 .WithTitle("Pick your player!")
                                 .WithAllowCancel(false)
