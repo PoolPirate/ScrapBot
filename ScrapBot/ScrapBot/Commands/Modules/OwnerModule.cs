@@ -11,7 +11,7 @@ namespace ScrapBot.Commands.Modules
     {
         [Command("ban")]
         [RequireOwner]
-        public async Task FakeBanAsync(SocketUser user)
+        public async Task FakeBanAsync(IUser user)
         {
             var embed = new EmbedBuilder()
                 .WithColor(EmbedColor.Success)
