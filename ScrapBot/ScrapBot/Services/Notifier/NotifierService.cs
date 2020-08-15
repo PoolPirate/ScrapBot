@@ -24,7 +24,7 @@ namespace ScrapBot.Services
         {
             Updater = new Timer(15000)
             {
-                AutoReset = true
+                AutoReset = false
             };
 
             Updater.Elapsed += async (a, b) => await UpdateNotifersAsync();
@@ -57,6 +57,8 @@ namespace ScrapBot.Services
 
             await dbContext.SaveChangesAsync();
             scope.Dispose();
+
+            Updater.Start();
         }
 
         private async Task SendLeaderboardsAsync(RestDMChannel channel, NotifierType type)
