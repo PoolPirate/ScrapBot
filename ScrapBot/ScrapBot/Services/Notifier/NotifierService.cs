@@ -38,7 +38,8 @@ namespace ScrapBot.Services
 
         private async Task UpdateNotifersAsync()
         {
-            var dbContext = Provider.GetService<ScrapDbContext>();
+            var scope = Provider.CreateScope();
+            var dbContext = scope.ServiceProvider.GetRequiredService<ScrapDbContext>();
 
             var notifiers = await (dbContext.Notifiers as IQueryable<Notifier>).ToListAsync();
             notifiers.RemoveAll(x => x.NextTrigger > DateTimeOffset.UtcNow);
@@ -55,6 +56,7 @@ namespace ScrapBot.Services
             }
 
             await dbContext.SaveChangesAsync();
+            scope.Dispose();
         }
 
         private async Task SendLeaderboardsAsync(RestDMChannel channel, NotifierType type)
