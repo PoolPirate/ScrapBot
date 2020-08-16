@@ -41,15 +41,18 @@ namespace ScrapBot.Services
             var scope = Provider.CreateScope();
             var dbContext = scope.ServiceProvider.GetRequiredService<ScrapDbContext>();
 
-            var notifiers = await (dbContext.Notifiers as IQueryable<Notifier>).ToListAsync();
-            notifiers.RemoveAll(x => x.NextTrigger > DateTimeOffset.UtcNow);
+            var now = DateTimeOffset.UtcNow;
+
+            var notifiers = await (dbContext.Notifiers as IQueryable<Notifier>)
+                .Where(x => x.NextTrigger <= now)
+                .ToListAsync();
 
             foreach (var notifier in notifiers)
             {
                 var user = await Client.Shards.First().Rest.GetUserAsync(notifier.DiscordId);
                 var channel = await user.GetOrCreateDMChannelAsync();
 
-                notifier.NextTrigger = notifier.NextTrigger + notifier.Interval;
+                notifier.NextTrigger += notifier.Interval;
                 notifier.TriggerCount++;
 
                 await SendLeaderboardsAsync(channel, notifier.Type);
