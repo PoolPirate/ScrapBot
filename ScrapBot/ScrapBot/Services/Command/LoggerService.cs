@@ -32,7 +32,7 @@ namespace ScrapBot.Services
         {
             Client.Log += LogAsync;
             LogApiCountersTimer.Elapsed += (e, sender) => Task.Run(() => LogApiCountersAsync());
-            return LogApiCountersAsync();
+            return Task.CompletedTask;
         }
 
         public async Task LogApiCountersAsync()
