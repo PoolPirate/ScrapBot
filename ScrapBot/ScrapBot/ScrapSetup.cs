@@ -48,11 +48,10 @@ namespace ScrapBot
             ScrapClient = new ScrapClient(Config["scrapApi"]);
             Provider = MakeProvider();
 
-            await ScrapClient.StartAsync();
-            await InitializeServicesAsync();
-
             CommandService.AddModules(Assembly.GetEntryAssembly());
             InitializeTypeParsers();
+
+            await InitializeServicesAsync();
         }
 
         private async Task InitializeServicesAsync()
@@ -109,6 +108,7 @@ namespace ScrapBot
         public async Task RunAsync()
         {
             await Client.LoginAsync(TokenType.Bot, Config["tokens:bot"]);
+            await ScrapClient.StartAsync();
             await Client.StartAsync();
             await Task.Delay(-1);
         }
