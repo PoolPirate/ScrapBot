@@ -21,7 +21,7 @@ namespace ScrapBot.Services
 
         public LoggerService()
         {
-            LogApiCountersTimer = new Timer(60000)
+            LogApiCountersTimer = new Timer(300000)
             {
                 AutoReset = true,
                 Enabled = true
