@@ -48,6 +48,7 @@ namespace ScrapBot
             Config = MakeConfig();
             ScrapClient = new ScrapClient(Config["scrapApi"]);
             Provider = MakeProvider();
+            Logger = Provider.GetRequiredService<LoggerService>();
 
             CommandService.AddModules(Assembly.GetEntryAssembly());
             InitializeTypeParsers();
