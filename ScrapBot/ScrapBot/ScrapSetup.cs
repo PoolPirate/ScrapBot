@@ -23,6 +23,7 @@ namespace ScrapBot
         public DiscordShardedClient Client { get; private set; }
         public CommandService CommandService { get; private set; }
         public ScrapClient ScrapClient { get; private set; }
+        public LoggerService Logger { get; private set; }
         public IServiceProvider Provider { get; private set; }
 
         public async Task InitializeAsync()
@@ -109,6 +110,7 @@ namespace ScrapBot
         {
             await Client.LoginAsync(TokenType.Bot, Config["tokens:bot"]);
             await ScrapClient.StartAsync();
+            await Logger.LogApiCountersAsync();
             await Client.StartAsync();
             await Task.Delay(-1);
         }
