@@ -15,6 +15,11 @@ namespace ScrapBot.Commands
         public ScrapClient ScrapClient { get; set; }
         public CommandService Command { get; set; }
 
+        [Command("Bots", "Matches", "Match")]
+        [Description("Tutorial on how to use Bots")]
+        public Task BotEmotesAsync()
+            => ReplyAsync(embed: EmbedUtils.Bots);
+
         [Command("ApiInfo", "ApiCalls", "ApiRequests", "Api")]
         [Description("Gets some information about the underlying API")]
         public Task ApiInfoAsync()
