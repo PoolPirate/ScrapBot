@@ -17,7 +17,7 @@ namespace ScrapBot.Utils
                 .WithTitle("Bot Usage in ScrapTD")
                 .WithDescription("#1 Select the Emotes shown in the image below in your emote Tab\n" +
                                  "#2 Press play and wait about 10 seconds\n" +
-                                 "#3 Try to keep alive, most bots usually stop at some point :P")
+                                 "#3 Try to stay alive, most bots usually stop at some point :P")
                 .WithImageUrl("https://cdn.discordapp.com/attachments/441308951221370920/718940472080466061/Screenshot_20200606-233233_ScrapTD.jpg")
                 .Build();
 
