@@ -24,7 +24,7 @@ namespace ScrapBot.Commands
         public async Task CreateNotifierAsync()
         {
             var typeSelection = new MessageSelectionBuilder<NotifierType>()
-                .WithValues(Enum.GetValues(typeof(NotifierType)).Cast<NotifierType>())
+                .WithSelectables(Enum.GetValues(typeof(NotifierType)).Cast<NotifierType>())
                 .WithUsers(Context.User)
                 .WithAllowCancel(true)
                 .WithDeletion(DeletionOptions.AfterCapturedContext | DeletionOptions.Valid)
