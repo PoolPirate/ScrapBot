@@ -43,15 +43,18 @@ namespace ScrapBot.Commands
         [RequireBotPermission(ChannelPermission.ManageMessages | ChannelPermission.AddReactions)]
         public async Task PlayerStatisticsAsync([Name("PlayerName")][Remainder] string name)
         {
-            SendConstructionMessage();
+            var sendTask = SendConstructionMessage();
 
             var players = await ScrapClient.GetPlayersByNameAsync(name, 10);
 
-            await DeleteConstructionMessageAsync();
+            var constructionMessage = await sendTask;
 
             if (players.Length == 0)
             {
-                await ReplyAsync(embed: EmbedUtils.NotFoundEmbed("Player", name));
+                await constructionMessage.ModifyAsync(x =>
+                {
+                    x.Embed = EmbedUtils.NotFoundEmbed("Player", name);
+                });
                 return;
             }
             if (players.Length == 1)
@@ -62,7 +65,10 @@ namespace ScrapBot.Commands
                     ? await team.GetMemberAsync(player.Id)
                     : null;
 
-                await ReplyAsync(embed: EmbedUtils.PlayerEmbed(player, team, member));
+                await constructionMessage.ModifyAsync(x =>
+                {
+                    x.Embed = EmbedUtils.PlayerEmbed(player, team, member);
+                });
                 return;
             }
 
@@ -98,19 +104,26 @@ namespace ScrapBot.Commands
         [RequireBotPermission(ChannelPermission.ManageMessages | ChannelPermission.AddReactions)]
         public async Task TeamStatisticsAsync([Name("TeamName")][Remainder] string name)
         {
-            SendConstructionMessage();
+            var sendTask = SendConstructionMessage();
 
             var team = await ScrapClient.GetTeamByNameAsync(name);
 
-            await DeleteConstructionMessageAsync();
+            var constructionMessage = await sendTask;
 
             if (team != null)
             {
-                await ReplyAsync(embed: EmbedUtils.TeamEmbed(team, await team.GetLeaderAsync(), await team.GetSeasonWinsAsync()));
+                var embed = EmbedUtils.TeamEmbed(team, await team.GetLeaderAsync(), await team.GetSeasonWinsAsync());
+                await constructionMessage.ModifyAsync(x =>
+                {
+                    x.Embed = embed;
+                });
             }
             else
             {
-                await ReplyAsync(embed: EmbedUtils.NotFoundEmbed("Team", name));
+                await constructionMessage.ModifyAsync(x =>
+                {
+                    x.Embed = EmbedUtils.NotFoundEmbed("Team", name);
+                });
             }
         }
 
@@ -119,11 +132,11 @@ namespace ScrapBot.Commands
         [RequireBotPermission(ChannelPermission.ManageMessages | ChannelPermission.AddReactions)]
         public async Task TeamMembersAsync([Name("TeamName")][Remainder] string name)
         {
-            SendConstructionMessage();
+            var sendTask = SendConstructionMessage();
 
             var team = await ScrapClient.GetTeamByNameAsync(name);
 
-            await DeleteConstructionMessageAsync();
+            var constructionMessage = await sendTask;
 
             if (team != null)
             {
@@ -158,11 +171,14 @@ namespace ScrapBot.Commands
                     .WithPages(pages)
                     .Build();
 
-                await Interactivity.SendPaginatorAsync(paginator, Context.Channel);
+                await Interactivity.SendPaginatorAsync(paginator, Context.Channel, message: constructionMessage);
             }
             else
             {
-                await ReplyAsync(embed: EmbedUtils.NotFoundEmbed("Team", name));
+                await constructionMessage.ModifyAsync(x =>
+                {
+                    x.Embed = EmbedUtils.NotFoundEmbed("Team", name);
+                });
             }
         }
     }

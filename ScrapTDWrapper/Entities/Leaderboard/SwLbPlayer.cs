@@ -8,7 +8,7 @@ namespace ScrapTDWrapper.Entities
         public string Name { get; }
         public int SeasonWins { get; }
 
-        private SwLbPlayer(ScrapClient client, string id, string name, int seasonWins)
+        internal SwLbPlayer(ScrapClient client, string id, string name, int seasonWins)
             : base(client)
         {
             Id = id;

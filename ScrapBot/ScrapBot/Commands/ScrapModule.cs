@@ -13,11 +13,8 @@ namespace ScrapBot.Commands
         public async Task<RestUserMessage> ReplyAsync(string text = null, bool isTTS = false, Embed embed = null, RequestOptions options = null)
             => await Context.Channel.SendMessageAsync(text, isTTS, embed, options);
 
-        public void SendConstructionMessage()
-            => ConstructionMessageTask = ReplyAsync(embed: EmbedUtils.ConstructionEmbed);
-
-        public async Task DeleteConstructionMessageAsync()
-            => await (await ConstructionMessageTask).DeleteAsync();
+        public async Task<IUserMessage> SendConstructionMessage()
+            => await ReplyAsync(embed: EmbedUtils.ConstructionEmbed);
 
         public async Task ModifyConstructionMessageAsync(Embed embed)
             => await (await ConstructionMessageTask).ModifyAsync(x => x.Embed = embed);

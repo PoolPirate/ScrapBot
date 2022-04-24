@@ -99,27 +99,27 @@ namespace ScrapTDWrapper
             var leaderboard = await Client.GetTrophyLeaderboardAsync();
             return leaderboard.Teams;
         }
-        public async Task<SwLbPlayer[]> GetPlayerSeasonWinLeaderboardAsync()
-        {
-            CheckClientState();
-            UpdateCounters();
-            var unfilteredLbPlayers = await Client.GetPlayerSeasonWinLeaderboardAsync();
-            var filteredLbPlayers = new List<SwLbPlayer>();
+        //public async Task<SwLbPlayer[]> GetPlayerSeasonWinLeaderboardAsync()
+        //{
+        //    CheckClientState();
+        //    UpdateCounters();
+        //    var unfilteredLbPlayers = await Client.GetPlayerSeasonWinLeaderboardAsync();
+        //    var filteredLbPlayers = new List<SwLbPlayer>();
 
-            foreach (var lbPlayer in unfilteredLbPlayers)
-            {
-                var player = await GetPlayerByIdAsync(lbPlayer.Id);
+        //    foreach (var lbPlayer in unfilteredLbPlayers)
+        //    {
+        //        var player = await GetPlayerByIdAsync(lbPlayer.Id);
                 
-                if (player.TeamId == EmptyTeamId)
-                {
-                    continue;
-                }
+        //        if (player.TeamId == EmptyTeamId)
+        //        {
+        //            continue;
+        //        }
 
-                filteredLbPlayers.Add(lbPlayer);
-            }
+        //        filteredLbPlayers.Add(lbPlayer);
+        //    }
 
-            return filteredLbPlayers.ToArray();
-        }
+        //    return filteredLbPlayers.ToArray();
+        //}
         public Task<TwLbPlayer[]> GetPlayerTotalWinLeaderboardAsync()
         {
             CheckClientState();
@@ -190,6 +190,17 @@ namespace ScrapTDWrapper
         {
             var members = await GetAllMembersAsync();
             return members.Sum(x => x.SeasonWins);
+        }
+
+        public async Task<SwLbPlayer[]> GetPlayerSeasonWinLeaderboardAsync()
+        {
+            var members = await GetAllMembersAsync();
+
+            return members
+                .OrderByDescending(x => x.SeasonWins)
+                .Take(100)
+                .Select(x => new SwLbPlayer(this, x.Id, x.Name, x.SeasonWins))
+                .ToArray();
         }
         #endregion
         #endregion
