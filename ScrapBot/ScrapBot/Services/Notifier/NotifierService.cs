@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Threading.Tasks;
 using System.Timers;
+using Discord;
 using Discord.Rest;
 using Discord.WebSocket;
 using Microsoft.EntityFrameworkCore;
@@ -47,15 +48,19 @@ namespace ScrapBot.Services
                 .Where(x => x.NextTrigger <= now)
                 .ToListAsync();
 
-            foreach (var notifier in notifiers)
+            foreach (var notifierGroup in notifiers.GroupBy(x => x.Type))
             {
-                var user = await Client.Shards.First().Rest.GetUserAsync(notifier.DiscordId);
-                var channel = await user.GetOrCreateDMChannelAsync();
+                var embed = await GetNotificationEmbedAsync(notifierGroup.Key);
 
-                notifier.NextTrigger += notifier.Interval;
-                notifier.TriggerCount++;
+                foreach (var notifier in notifierGroup)
+                {
+                    var user = await Client.Shards.First().Rest.GetUserAsync(notifier.DiscordId);
+                    var channel = await user.GetOrCreateDMChannelAsync();
+                    notifier.NextTrigger += notifier.Interval;
+                    notifier.TriggerCount++;
 
-                await SendLeaderboardsAsync(channel, notifier.Type);
+                    await channel.SendMessageAsync(embed: embed);
+                }
             }
 
             await dbContext.SaveChangesAsync();
@@ -64,7 +69,7 @@ namespace ScrapBot.Services
             Updater.Start();
         }
 
-        private async Task SendLeaderboardsAsync(RestDMChannel channel, NotifierType type)
+        private async Task<Embed> GetNotificationEmbedAsync(NotifierType type)
         {
             if (type == NotifierType.PlayerSeasonWins)
             {
@@ -78,7 +83,7 @@ namespace ScrapBot.Services
                                    ":muscle:",
                                    EmbedColor.Leaderboard);
 
-                await channel.SendMessageAsync(embed: page.Build().Embed);
+                return page.Build().Embed;
             }
             else if (type == NotifierType.TeamSeasonWins)
             {
@@ -92,8 +97,10 @@ namespace ScrapBot.Services
                                    ":muscle:",
                                    EmbedColor.Leaderboard);
 
-                await channel.SendMessageAsync(embed: page.Build().Embed);
+                return page.Build().Embed;
             }
+
+            throw new InvalidOperationException("Invalid Notifier type");
         }
     }
 }
