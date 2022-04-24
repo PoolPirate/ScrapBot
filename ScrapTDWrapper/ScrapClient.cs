@@ -97,11 +97,26 @@ namespace ScrapTDWrapper
             var leaderboard = await Client.GetTrophyLeaderboardAsync();
             return leaderboard.Teams;
         }
-        public Task<SwLbPlayer[]> GetPlayerSeasonWinLeaderboardAsync()
+        public async Task<SwLbPlayer[]> GetPlayerSeasonWinLeaderboardAsync()
         {
             CheckClientState();
             UpdateCounters();
-            return Client.GetPlayerSeasonWinLeaderboardAsync();
+            var unfilteredLbPlayers = await Client.GetPlayerSeasonWinLeaderboardAsync();
+            var filteredLbPlayers = new List<SwLbPlayer>();
+
+            foreach (var lbPlayer in unfilteredLbPlayers)
+            {
+                var player = await GetPlayerByIdAsync(lbPlayer.Id);
+                
+                if (string.IsNullOrWhiteSpace(player.TeamId))
+                {
+                    continue;
+                }
+
+                filteredLbPlayers.Add(lbPlayer);
+            }
+
+            return filteredLbPlayers.ToArray();
         }
         public Task<TwLbPlayer[]> GetPlayerTotalWinLeaderboardAsync()
         {
