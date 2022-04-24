@@ -9,6 +9,8 @@ namespace ScrapTDWrapper
 {
     public class ScrapClient
     {
+        public const string EmptyTeamId = "-";
+
         private SocketClient Client { get; }
 
         public int DailyRequestCount { get; private set; }
@@ -108,7 +110,7 @@ namespace ScrapTDWrapper
             {
                 var player = await GetPlayerByIdAsync(lbPlayer.Id);
                 
-                if (string.IsNullOrWhiteSpace(player.TeamId))
+                if (player.TeamId == EmptyTeamId)
                 {
                     continue;
                 }
