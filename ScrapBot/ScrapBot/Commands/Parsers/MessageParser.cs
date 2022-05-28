@@ -1,8 +1,8 @@
-﻿using System.Linq;
-using System.Threading.Tasks;
-using Discord;
+﻿using Discord;
 using Qmmands;
 using ScrapBot.Extensions;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace ScrapBot.Commands
 {
@@ -13,7 +13,7 @@ namespace ScrapBot.Commands
             var messages = context.Channel.CachedMessages;
             IMessage message = null;
 
-            if (ulong.TryParse(value, out ulong id))
+            if (System.UInt64.TryParse(value, out ulong id))
             {
                 message = await context.Channel.GetMessageAsync(id);
             }

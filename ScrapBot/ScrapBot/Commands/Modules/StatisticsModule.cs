@@ -1,7 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Discord;
+﻿using Discord;
 using Interactivity;
 using Interactivity.Pagination;
 using Interactivity.Selection;
@@ -11,6 +8,9 @@ using ScrapBot.Services;
 using ScrapBot.Utils;
 using ScrapTDWrapper;
 using ScrapTDWrapper.Entities;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace ScrapBot.Commands
 {
@@ -25,7 +25,7 @@ namespace ScrapBot.Commands
         [Description("Get the total amount of matches played this season")]
         public async Task GetTotalWinsAsync()
         {
-            SendConstructionMessage();
+            var sendTask = SendConstructionMessage();
 
             int winCount = await ScrapClient.GetTotalSeasonWinsAsync();
 
@@ -35,7 +35,8 @@ namespace ScrapBot.Commands
                 .WithDescription($"{winCount}")
                 .Build();
 
-            await ModifyConstructionMessageAsync(embed);
+            var constructionMessage = await sendTask;
+            await constructionMessage.ModifyAsync(x => x.Embed = embed);
         }
 
         [Command("Player", "P")]
@@ -51,24 +52,18 @@ namespace ScrapBot.Commands
 
             if (players.Length == 0)
             {
-                await constructionMessage.ModifyAsync(x =>
-                {
-                    x.Embed = EmbedUtils.NotFoundEmbed("Player", name);
-                });
+                await constructionMessage.ModifyAsync(x => x.Embed = EmbedUtils.NotFoundEmbed("Player", name));
                 return;
             }
             if (players.Length == 1)
             {
                 var player = players[0];
                 var team = await player.GetTeamAsync();
-                var member = team != null
+                var member = team is not null
                     ? await team.GetMemberAsync(player.Id)
                     : null;
 
-                await constructionMessage.ModifyAsync(x =>
-                {
-                    x.Embed = EmbedUtils.PlayerEmbed(player, team, member);
-                });
+                await constructionMessage.ModifyAsync(x => x.Embed = EmbedUtils.PlayerEmbed(player, team, member));
                 return;
             }
 
@@ -92,7 +87,7 @@ namespace ScrapBot.Commands
 
             var selectedPlayer = result.Value;
             var selectedTeam = await selectedPlayer.GetTeamAsync();
-            var selectedMember = selectedTeam != null
+            var selectedMember = selectedTeam is not null
                 ? await selectedTeam.GetMemberAsync(selectedPlayer.Id)
                 : null;
 
@@ -110,20 +105,14 @@ namespace ScrapBot.Commands
 
             var constructionMessage = await sendTask;
 
-            if (team != null)
+            if (team is not null)
             {
                 var embed = EmbedUtils.TeamEmbed(team, await team.GetLeaderAsync(), await team.GetSeasonWinsAsync());
-                await constructionMessage.ModifyAsync(x =>
-                {
-                    x.Embed = embed;
-                });
+                await constructionMessage.ModifyAsync(x => x.Embed = embed);
             }
             else
             {
-                await constructionMessage.ModifyAsync(x =>
-                {
-                    x.Embed = EmbedUtils.NotFoundEmbed("Team", name);
-                });
+                await constructionMessage.ModifyAsync(x => x.Embed = EmbedUtils.NotFoundEmbed("Team", name));
             }
         }
 
@@ -138,7 +127,7 @@ namespace ScrapBot.Commands
 
             var constructionMessage = await sendTask;
 
-            if (team != null)
+            if (team is not null)
             {
                 var pages = new List<PageBuilder>();
 
@@ -175,10 +164,7 @@ namespace ScrapBot.Commands
             }
             else
             {
-                await constructionMessage.ModifyAsync(x =>
-                {
-                    x.Embed = EmbedUtils.NotFoundEmbed("Team", name);
-                });
+                await constructionMessage.ModifyAsync(x => x.Embed = EmbedUtils.NotFoundEmbed("Team", name));
             }
         }
     }

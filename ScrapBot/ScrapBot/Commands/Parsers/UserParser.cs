@@ -1,9 +1,9 @@
-﻿using System.Linq;
-using System.Threading.Tasks;
-using Discord;
+﻿using Discord;
 using Discord.WebSocket;
 using Qmmands;
 using ScrapBot.Extensions;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace ScrapBot.Commands
 {
@@ -14,7 +14,7 @@ namespace ScrapBot.Commands
             var users = context.Guild.Users.OfType<IUser>().ToList();
             IUser user = null;
 
-            if (ulong.TryParse(value, out ulong id) || MentionUtils.TryParseUser(value, out id))
+            if (System.UInt64.TryParse(value, out ulong id) || MentionUtils.TryParseUser(value, out id))
             {
                 user = context.Client.GetUser(id);
             }

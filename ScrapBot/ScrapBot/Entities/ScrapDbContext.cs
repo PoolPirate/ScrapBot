@@ -6,7 +6,7 @@ namespace ScrapBot.Entities
     {
         public DbSet<Notifier> Notifiers { get; set; }
 
-        public ScrapDbContext(DbContextOptions options) 
+        public ScrapDbContext(DbContextOptions options)
             : base(options)
         {
         }
@@ -15,7 +15,7 @@ namespace ScrapBot.Entities
         {
         }
 
-        protected override void OnModelCreating(ModelBuilder modelBuilder) 
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
             => modelBuilder.Entity<Notifier>(b =>
                {
                    b.Property(x => x.Id);

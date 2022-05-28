@@ -1,9 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Discord;
+﻿using Discord;
 using Interactivity;
 using ScrapTDWrapper.Entities;
+using System;
+using System.Collections.Generic;
+using System.Text;
 
 namespace ScrapBot.Utils
 {

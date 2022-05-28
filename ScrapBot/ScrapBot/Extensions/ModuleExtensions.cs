@@ -1,7 +1,7 @@
-﻿using System.Linq;
-using System.Threading.Tasks;
-using Qmmands;
+﻿using Qmmands;
 using ScrapBot.Commands;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace ScrapBot.Extensions
 {

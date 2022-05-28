@@ -34,11 +34,11 @@ namespace ScrapTDWrapper.Entities
             return new Member(client,
                               parts[0],
                               parts[1],
-                              (Rank) Enum.Parse(typeof(Rank), parts[2]),
-                              int.Parse(parts[3]),
-                              int.Parse(parts[4]),
+                              (Rank)Enum.Parse(typeof(Rank), parts[2]),
+                              Int32.Parse(parts[3]),
+                              Int32.Parse(parts[4]),
                               parts[5] == "0",
-                              int.Parse(parts[6]));
+                              Int32.Parse(parts[6]));
         }
     }
 }

@@ -27,8 +27,8 @@ namespace ScrapTDWrapper.Entities
             return new TLbPlayer(client,
                                  parts[0],
                                  parts[1],
-                                 int.Parse(parts[2]),
-                                 int.Parse(parts[3]));
+                                 System.Int32.Parse(parts[2]),
+                                 System.Int32.Parse(parts[3]));
         }
     }
 }

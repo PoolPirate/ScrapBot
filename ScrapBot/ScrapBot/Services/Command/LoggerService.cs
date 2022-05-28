@@ -1,11 +1,11 @@
-﻿using System;
-using System.Threading.Tasks;
-using System.Timers;
-using Discord;
+﻿using Discord;
 using Discord.WebSocket;
 using Microsoft.Extensions.Configuration;
 using ScrapBot.Utils;
 using ScrapTDWrapper;
+using System;
+using System.Threading.Tasks;
+using System.Timers;
 
 namespace ScrapBot.Services
 {
@@ -59,7 +59,7 @@ namespace ScrapBot.Services
 
         public async Task ReportErrorAsync(SocketMessage msg, Exception ex)
         {
-            var errorLogChannel = Client.GetChannel(ulong.Parse(Config["errorLogChannel"])) as ISocketMessageChannel;
+            var errorLogChannel = Client.GetChannel(UInt64.Parse(Config["errorLogChannel"])) as ISocketMessageChannel;
             await errorLogChannel.SendMessageAsync(embed: EmbedUtils.Exception(msg, ex));
 
             await msg.Channel.SendMessageAsync(embed: EmbedUtils.Sorry);

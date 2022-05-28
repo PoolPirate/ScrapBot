@@ -1,8 +1,8 @@
-﻿using System.Linq;
-using System.Threading.Tasks;
-using Discord;
+﻿using Discord;
 using Qmmands;
 using ScrapBot.Extensions;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace ScrapBot.Commands
 {
@@ -13,9 +13,9 @@ namespace ScrapBot.Commands
             var roles = context.Guild.Roles.ToList();
             IRole role = null;
 
-            if (ulong.TryParse(value, out ulong id) || MentionUtils.TryParseRole(value, out id))
+            if (System.UInt64.TryParse(value, out ulong id) || MentionUtils.TryParseRole(value, out id))
             {
-                role = context.Guild.GetRole(id) as IRole;
+                role = context.Guild.GetRole(id);
             }
 
             if (role is null)

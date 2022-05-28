@@ -1,6 +1,6 @@
-﻿using System.Linq;
+﻿using Qmmands;
+using System.Linq;
 using System.Threading.Tasks;
-using Qmmands;
 
 namespace ScrapBot.Commands
 {
@@ -14,7 +14,7 @@ namespace ScrapBot.Commands
             UserIds = userIds;
         }
 
-        public override ValueTask<CheckResult> CheckAsync(ScrapContext context) 
+        public override ValueTask<CheckResult> CheckAsync(ScrapContext context)
             => UserIds.Contains(context.User.Id)
                 ? CheckResult.Successful
                 : CheckResult.Unsuccessful("You do not have access to this command!");

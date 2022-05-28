@@ -1,10 +1,10 @@
-﻿using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Discord;
+﻿using Discord;
 using Qmmands;
 using ScrapBot.Commands;
 using ScrapBot.Utils;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace ScrapBot.Extensions
 {
@@ -31,10 +31,10 @@ namespace ScrapBot.Extensions
                 .WithColor(EmbedColor.Help)
                 .WithTitle($"{command.Name} Overview")
                 .AddField("Usage", GetUsageMessage(command))
-                .AddField("Aliases", $"{string.Join(", ", command.Aliases)}")
+                .AddField("Aliases", $"{System.String.Join(", ", command.Aliases)}")
                 .AddField("Description", command.Description ?? "None");
 
-            if (!string.IsNullOrWhiteSpace(command.Remarks))
+            if (!System.String.IsNullOrWhiteSpace(command.Remarks))
             {
                 builder.AddField("Remarks", command.Remarks);
             }
@@ -45,7 +45,7 @@ namespace ScrapBot.Extensions
                 var checkDescriptions = command.Checks.Select(x => x as ScrapCheckAttribute)
                                                       .Select(x => x.Description);
 
-                builder.AddField("Checks", string.Join("- ", checkDescriptions));
+                builder.AddField("Checks", System.String.Join("- ", checkDescriptions));
 
             }
 

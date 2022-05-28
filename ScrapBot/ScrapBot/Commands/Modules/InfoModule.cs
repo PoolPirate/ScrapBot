@@ -1,11 +1,11 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Discord;
+﻿using Discord;
 using Qmmands;
 using ScrapBot.Extensions;
 using ScrapBot.Utils;
 using ScrapTDWrapper;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace ScrapBot.Commands
 {
@@ -76,7 +76,7 @@ namespace ScrapBot.Commands
                 }
 
                 helpBuilder.AddField($"{module.Name}",
-                                     $"{string.Join("\n", runnableCommands.Select(x => x.GetUsageMessage()))}");
+                                     $"{System.String.Join("\n", runnableCommands.Select(x => x.GetUsageMessage()))}");
             }
 
             var helpEmbed = helpBuilder

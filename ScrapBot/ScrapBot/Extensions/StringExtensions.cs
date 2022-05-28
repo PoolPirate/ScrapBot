@@ -8,7 +8,7 @@ namespace ScrapBot.Extensions
             => !(str is null) && str.Equals(otherString, StringComparison.OrdinalIgnoreCase);
 
         public static string Truncate(this string value, int maxLength)
-            => string.IsNullOrEmpty(value)
+            => String.IsNullOrEmpty(value)
                 ? value
                 : value.Length <= maxLength
                     ? value

@@ -1,5 +1,5 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore.Migrations;
+﻿using Microsoft.EntityFrameworkCore.Migrations;
+using System;
 
 namespace ScrapBot.Migrations
 {
@@ -19,10 +19,7 @@ namespace ScrapBot.Migrations
                     CompactDisplay = table.Column<bool>(nullable: false),
                     Type = table.Column<int>(nullable: false)
                 },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Notifiers", x => x.Id);
-                });
+                constraints: table => table.PrimaryKey("PK_Notifiers", x => x.Id));
 
             migrationBuilder.CreateIndex(
                 name: "IX_Notifiers_DiscordId",
@@ -30,10 +27,7 @@ namespace ScrapBot.Migrations
                 column: "DiscordId");
         }
 
-        protected override void Down(MigrationBuilder migrationBuilder)
-        {
-            migrationBuilder.DropTable(
+        protected override void Down(MigrationBuilder migrationBuilder) => migrationBuilder.DropTable(
                 name: "Notifiers");
-        }
     }
 }

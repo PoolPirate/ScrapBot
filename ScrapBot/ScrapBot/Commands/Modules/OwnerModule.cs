@@ -1,8 +1,7 @@
-﻿using System.Threading.Tasks;
-using Discord;
-using Discord.WebSocket;
+﻿using Discord;
 using Qmmands;
 using ScrapBot.Utils;
+using System.Threading.Tasks;
 
 namespace ScrapBot.Commands.Modules
 {

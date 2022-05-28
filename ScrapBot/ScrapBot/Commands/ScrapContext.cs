@@ -1,6 +1,6 @@
-﻿using System;
-using Discord.WebSocket;
+﻿using Discord.WebSocket;
 using Qmmands;
+using System;
 
 namespace ScrapBot.Commands
 {

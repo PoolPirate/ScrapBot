@@ -1,6 +1,6 @@
-﻿using System.Reflection;
+﻿using Qmmands;
+using System.Reflection;
 using System.Threading.Tasks;
-using Qmmands;
 
 namespace ScrapBot.Commands
 {

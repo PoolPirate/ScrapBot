@@ -1,8 +1,8 @@
-﻿using System.Linq;
-using System.Threading.Tasks;
-using Discord;
+﻿using Discord;
 using Qmmands;
 using ScrapBot.Extensions;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace ScrapBot.Commands
 {
@@ -13,7 +13,7 @@ namespace ScrapBot.Commands
             var channels = context.Guild.Channels.OfType<ITextChannel>().ToList();
             ITextChannel channel = null;
 
-            if (ulong.TryParse(value, out ulong id) || MentionUtils.TryParseChannel(value, out id))
+            if (System.UInt64.TryParse(value, out ulong id) || MentionUtils.TryParseChannel(value, out id))
             {
                 channel = context.Client.GetChannel(id) as ITextChannel;
             }

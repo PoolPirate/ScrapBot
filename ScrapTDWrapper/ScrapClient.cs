@@ -1,9 +1,9 @@
-﻿using System;
+﻿using ScrapTDWrapper.Entities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
-using ScrapTDWrapper.Entities;
 
 namespace ScrapTDWrapper
 {
@@ -62,7 +62,7 @@ namespace ScrapTDWrapper
         }
         internal Task<Member[]> GetTeamMembersAsync(string teamId)
         {
-            if (string.IsNullOrWhiteSpace(teamId))
+            if (String.IsNullOrWhiteSpace(teamId))
             {
                 return Task.FromResult(Array.Empty<Member>());
             }
@@ -109,7 +109,7 @@ namespace ScrapTDWrapper
         //    foreach (var lbPlayer in unfilteredLbPlayers)
         //    {
         //        var player = await GetPlayerByIdAsync(lbPlayer.Id);
-                
+
         //        if (player.TeamId == EmptyTeamId)
         //        {
         //            continue;
@@ -152,7 +152,7 @@ namespace ScrapTDWrapper
         }
         internal async Task<Team> GetTeamByIdAsync(string teamId)
         {
-            if (string.IsNullOrWhiteSpace(teamId))
+            if (String.IsNullOrWhiteSpace(teamId))
             {
                 return null;
             }

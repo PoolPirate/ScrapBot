@@ -1,14 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Discord;
+﻿using Discord;
 using Interactivity;
 using Interactivity.Pagination;
 using Qmmands;
 using ScrapBot.Extensions;
 using ScrapBot.Utils;
 using ScrapTDWrapper;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace ScrapBot.Commands
 {
@@ -113,7 +113,7 @@ namespace ScrapBot.Commands
         }
 
         private async Task LeaderboardAsync<T>(T[] values, Func<T, string> nameSelector, Func<T, string> valueSelector,
-                                               string entityName, string valueName, Color color, 
+                                               string entityName, string valueName, Color color,
                                                IUserMessage constructionMessage)
         {
             var pages = new List<PageBuilder>();

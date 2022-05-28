@@ -26,7 +26,7 @@ namespace ScrapTDWrapper.Entities
             return new XPLbPlayer(client,
                                   parts[0],
                                   parts[1],
-                                  double.Parse(parts[2], CultureInfo.InvariantCulture));
+                                  System.Double.Parse(parts[2], CultureInfo.InvariantCulture));
         }
     }
 }

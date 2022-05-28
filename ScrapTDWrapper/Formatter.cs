@@ -30,7 +30,7 @@ namespace ScrapTDWrapper
                 {
                     if (character == '>')
                     {
-                        int index = int.Parse(numberBuilder.ToString());
+                        int index = System.Int32.Parse(numberBuilder.ToString());
                         numberBuilder.Clear();
                         isSepcialChar = false;
 

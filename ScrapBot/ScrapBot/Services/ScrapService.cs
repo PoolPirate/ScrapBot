@@ -18,7 +18,7 @@ namespace ScrapBot.Services
             {
                 object service = provider.GetService(member.FieldType);
 
-                if (service == null)
+                if (service is null)
                 {
                     continue;
                 }

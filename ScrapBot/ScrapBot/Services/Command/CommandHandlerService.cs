@@ -1,11 +1,11 @@
-﻿using System;
-using System.Threading.Tasks;
-using Discord;
+﻿using Discord;
 using Discord.WebSocket;
 using Microsoft.Extensions.Configuration;
 using Qmmands;
 using ScrapBot.Commands;
 using ScrapBot.Utils;
+using System;
+using System.Threading.Tasks;
 
 namespace ScrapBot.Services
 {
@@ -33,7 +33,7 @@ namespace ScrapBot.Services
             {
                 return;
             }
-            if (!(message.Channel is SocketTextChannel textChannel) || !(message.Author is SocketGuildUser guildUser))
+            if (message.Channel is not SocketTextChannel textChannel || message.Author is not SocketGuildUser guildUser)
             {
                 await message.Channel.SendMessageAsync(embed: EmbedUtils.UnsupportedEnvironment);
                 return;
@@ -46,7 +46,7 @@ namespace ScrapBot.Services
             var context = new ScrapContext(client, message as SocketUserMessage, provider);
             var result = await commands.ExecuteAsync(output, context);
 
-            if (!(result is FailedResult failedResult))
+            if (result is not FailedResult failedResult)
             {
                 return;
             }
@@ -68,7 +68,7 @@ namespace ScrapBot.Services
         {
             var ctx = args.Context as ScrapContext;
 
-            if (args.Result.Exception != null)
+            if (args.Result.Exception is not null)
             {
                 await logger.ReportErrorAsync(ctx.Message, args.Result.Exception);
             }

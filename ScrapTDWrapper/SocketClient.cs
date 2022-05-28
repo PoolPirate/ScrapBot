@@ -1,11 +1,11 @@
-﻿using System;
+﻿using ScrapTDWrapper.Entities;
+using System;
 using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Sockets;
 using System.Threading;
 using System.Threading.Tasks;
-using ScrapTDWrapper.Entities;
 
 namespace ScrapTDWrapper
 {
@@ -157,7 +157,7 @@ namespace ScrapTDWrapper
 
                 string response = await Reader.ReadLineAsync();
 
-                return int.Parse(response);
+                return Int32.Parse(response);
             }
             finally
             {
@@ -179,7 +179,7 @@ namespace ScrapTDWrapper
 
                 string response = await Reader.ReadLineAsync();
 
-                return int.Parse(response);
+                return Int32.Parse(response);
             }
             finally
             {

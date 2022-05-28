@@ -37,12 +37,12 @@ namespace ScrapTDWrapper.Entities
             return new Player(client,
                               parts[0],
                               parts[1],
-                              (Rank) Enum.Parse(typeof(Rank), parts[2]),
-                              int.Parse(parts[3]),
+                              (Rank)Enum.Parse(typeof(Rank), parts[2]),
+                              Int32.Parse(parts[3]),
                               parts[4],
-                              int.Parse(parts[5]),
-                              int.Parse(parts[6]),
-                              int.Parse(parts[7]));
+                              Int32.Parse(parts[5]),
+                              Int32.Parse(parts[6]),
+                              Int32.Parse(parts[7]));
         }
 
         public async Task<Team> GetTeamAsync()

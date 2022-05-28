@@ -1,13 +1,12 @@
-﻿using System;
-using System.Linq;
-using System.Threading.Tasks;
-using Discord;
+﻿using Discord;
 using Interactivity;
-using Interactivity.Confirmation;
 using Interactivity.Selection;
 using Qmmands;
 using ScrapBot.Entities;
 using ScrapBot.Utils;
+using System;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace ScrapBot.Commands
 {
@@ -42,13 +41,10 @@ namespace ScrapBot.Commands
                 .WithTitle("How many minutes should I wait before notifying you again?")
                 .Build());
 
-            var intervalResult = await Interactivity.NextMessageAsync(message =>
-            {
-                return message.Channel == Context.Channel &&
+            var intervalResult = await Interactivity.NextMessageAsync(message => message.Channel == Context.Channel &&
                     message.Author == Context.User &&
-                    int.TryParse(message.Content, out int minutes) &&
-                    minutes > 0;
-            });
+                    Int32.TryParse(message.Content, out int minutes) &&
+                    minutes > 0);
 
             if (!intervalResult.IsSuccess)
             {
@@ -58,7 +54,7 @@ namespace ScrapBot.Commands
             await message.DeleteAsync();
             await intervalResult.Value.DeleteAsync();
 
-            var interval = TimeSpan.FromMinutes(int.Parse(intervalResult.Value.Content));
+            var interval = TimeSpan.FromMinutes(Int32.Parse(intervalResult.Value.Content));
 
             //var compactConfirmation = new ConfirmationBuilder()
             //    .WithDeletion(DeletionOptions.AfterCapturedContext)

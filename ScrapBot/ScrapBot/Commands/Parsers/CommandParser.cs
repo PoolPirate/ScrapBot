@@ -1,7 +1,7 @@
-﻿using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.DependencyInjection;
 using Qmmands;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace ScrapBot.Commands
 {
@@ -10,12 +10,11 @@ namespace ScrapBot.Commands
         public override ValueTask<TypeParserResult<Command>> ParseAsync(Parameter parameter, string value, ScrapContext context)
         {
             var _commands = context.ServiceProvider.GetService<CommandService>();
+            var matchingCommands = _commands.FindCommands(value);
 
-            var command = _commands.FindCommands(value).FirstOrDefault()?.Command;
-
-            return command == null
+            return matchingCommands.Count == 0
                 ? TypeParserResult<Command>.Unsuccessful("Could not find a command matching your input!")
-                : TypeParserResult<Command>.Successful(command);
+                : TypeParserResult<Command>.Successful(matchingCommands[0].Command);
         }
     }
 }

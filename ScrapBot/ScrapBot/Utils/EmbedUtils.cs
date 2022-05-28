@@ -1,11 +1,11 @@
-﻿using System;
-using System.Linq;
-using System.Text;
-using Discord;
+﻿using Discord;
 using Discord.WebSocket;
 using Qmmands;
 using ScrapBot.Extensions;
 using ScrapTDWrapper.Entities;
+using System;
+using System.Linq;
+using System.Text;
 
 namespace ScrapBot.Utils
 {
@@ -105,7 +105,7 @@ namespace ScrapBot.Utils
                 .AddField("Matches Won :muscle:", player.MatchesWon, true)
                 .AddField("Trophy Record :arrow_double_up:", player.MaxTrophies, true);
 
-            if (team != null)
+            if (team is not null)
             {
                 playerEmbed
                     .AddField("Team :family_mwbb:", $"{team.Name} ({team.Trophies} :trophy:)", true)

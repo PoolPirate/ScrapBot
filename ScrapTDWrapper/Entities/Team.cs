@@ -36,9 +36,9 @@ namespace ScrapTDWrapper.Entities
                             parts[1],
                             parts[2],
                             parts[3],
-                            int.Parse(parts[4]),
-                            int.Parse(parts[5]),
-                            int.Parse(parts[6]));
+                            System.Int32.Parse(parts[4]),
+                            System.Int32.Parse(parts[5]),
+                            System.Int32.Parse(parts[6]));
         }
 
         public Task<Member[]> GetMembersAsync() => Client.GetTeamMembersAsync(Id);
