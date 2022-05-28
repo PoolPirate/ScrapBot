@@ -45,10 +45,10 @@ namespace ScrapTDWrapper.Entities
                               int.Parse(parts[7]));
         }
 
-        public Task<Team> GetTeamAsync()
+        public async Task<Team> GetTeamAsync()
             => TeamId == ScrapClient.EmptyTeamId
             ? null
-            : Client.GetTeamByIdAsync(TeamId);
+            : await Client.GetTeamByIdAsync(TeamId);
 
     }
 }
