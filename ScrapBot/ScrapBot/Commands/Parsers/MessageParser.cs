@@ -24,14 +24,14 @@ namespace ScrapBot.Commands
                     x.Content.EqualsIgnoreCase(value));
                 if (match.Count() > 1)
                 {
-                    return TypeParserResult<IMessage>.Unsuccessful(
+                    return TypeParserResult<IMessage>.Failed(
                         "Multiple messages found, try using its ID.");
                 }
 
                 message = match.FirstOrDefault();
             }
             return message is null
-                ? TypeParserResult<IMessage>.Unsuccessful("Message not found.")
+                ? TypeParserResult<IMessage>.Failed("Message not found.")
                 : TypeParserResult<IMessage>.Successful(message);
         }
     }

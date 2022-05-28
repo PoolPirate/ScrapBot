@@ -27,6 +27,8 @@ namespace ScrapBot.Services
             return base.InitializeAsync();
         }
 
+        private ValueTask Commands_CommandExecuted(object sender, CommandExecutedEventArgs e) => throw new NotImplementedException();
+
         private async Task HandleMessageAsync(SocketMessage message)
         {
             if (!CommandUtilities.HasPrefix(message.Content, config["prefix"], StringComparison.OrdinalIgnoreCase, out string output))
@@ -58,22 +60,22 @@ namespace ScrapBot.Services
             await message.Channel.SendMessageAsync(embed: EmbedUtils.FailedResultEmbed(failedResult));
         }
 
-        private async Task CommandExecutedAsync(CommandExecutedEventArgs args)
+        private async ValueTask CommandExecutedAsync(object sender, CommandExecutedEventArgs e)
         {
             var message = new LogMessage(LogSeverity.Info, "CmdHandler", "Command Executed Successfully!");
             await logger.LogAsync(message);
         }
 
-        private async Task CommandExecutionFailedAsync(CommandExecutionFailedEventArgs args)
+        private async ValueTask CommandExecutionFailedAsync(object sender, CommandExecutionFailedEventArgs e)
         {
-            var ctx = args.Context as ScrapContext;
+            var ctx = e.Context as ScrapContext;
 
-            if (args.Result.Exception is not null)
+            if (e.Result.Exception is not null)
             {
-                await logger.ReportErrorAsync(ctx.Message, args.Result.Exception);
+                await logger.ReportErrorAsync(ctx.Message, e.Result.Exception);
             }
 
-            var message = new LogMessage(LogSeverity.Warning, "CmdHandler", "An error occured while executing a command!", args.Result.Exception);
+            var message = new LogMessage(LogSeverity.Warning, "CmdHandler", "An error occured while executing a command!", e.Result.Exception);
             await logger.LogAsync(message);
         }
     }

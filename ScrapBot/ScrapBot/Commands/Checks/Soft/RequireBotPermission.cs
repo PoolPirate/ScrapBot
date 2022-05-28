@@ -32,7 +32,7 @@ namespace ScrapBot.Commands
             {
                 if (!guildUser.GuildPermissions.Has(GuildPermission.Value))
                 {
-                    return CheckResult.Unsuccessful($"I'm missing the {GuildPermission.Value} guild permission :scream:");
+                    return CheckResult.Failed($"I'm missing the {GuildPermission.Value} guild permission :scream:");
                 }
             }
 
@@ -43,7 +43,7 @@ namespace ScrapBot.Commands
 
                 if (!perms.Has(ChannelPermission.Value))
                 {
-                    return CheckResult.Unsuccessful($"I'm missing the {ChannelPermission.Value} channel permission :scream:");
+                    return CheckResult.Failed($"I'm missing the {ChannelPermission.Value} channel permission :scream:");
                 }
             }
 

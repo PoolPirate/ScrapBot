@@ -24,14 +24,14 @@ namespace ScrapBot.Commands
                     x.Name.EqualsIgnoreCase(value));
                 if (match.Count() > 1)
                 {
-                    return TypeParserResult<IRole>.Unsuccessful(
+                    return TypeParserResult<IRole>.Failed(
                         "Multiple roles found, try mentioning the role or using its ID.");
                 }
 
                 role = match.FirstOrDefault();
             }
             return role is null
-                ? TypeParserResult<IRole>.Unsuccessful("Role not found.")
+                ? TypeParserResult<IRole>.Failed("Role not found.")
                 : TypeParserResult<IRole>.Successful(role);
         }
     }

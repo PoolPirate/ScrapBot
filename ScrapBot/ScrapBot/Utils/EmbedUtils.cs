@@ -130,28 +130,28 @@ namespace ScrapBot.Utils
                     description.AppendLine("__The following check(s) failed:__");
                     foreach (var check in checksResult.FailedChecks)
                     {
-                        description.AppendLine($"- `{check.Result.Reason}`");
+                        description.AppendLine($"- `{check.Result.FailureReason}`");
                     }
                     break;
                 case ParameterChecksFailedResult checksResult:
                     description.AppendLine("__The following check(s) failed:__");
                     foreach (var check in checksResult.FailedChecks)
                     {
-                        description.AppendLine($"- `{check.Result.Reason}`");
+                        description.AppendLine($"- `{check.Result.FailureReason}`");
                     }
                     break;
                 case ArgumentParseFailedResult argResult:
                     description.AppendLine("__**The following parameters are missing:**__");
-                    description.AppendLine($"`{argResult.Reason}`");
+                    description.AppendLine($"`{argResult.FailureReason}`");
                     break;
                 case OverloadsFailedResult overloadsResult:
                     description.AppendLine("__**The syntax was wrong**__");
-                    description.AppendLine($"`{overloadsResult.Reason}`");
-                    description.AppendLine($"`{overloadsResult.FailedOverloads.First().Value.Reason}`");
+                    description.AppendLine($"`{overloadsResult.FailureReason}`");
+                    description.AppendLine($"`{overloadsResult.FailedOverloads.First().Value.FailureReason}`");
                     break;
                 case TypeParseFailedResult parseResult:
                     description.AppendLine("__**The following parameter couldn't be parsed**__");
-                    description.AppendLine($"`[{parseResult.Parameter.Name}] - {parseResult.Reason}`");
+                    description.AppendLine($"`[{parseResult.Parameter.Name}] - {parseResult.FailureReason}`");
                     break;
             }
 

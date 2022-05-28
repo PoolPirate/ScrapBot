@@ -11,7 +11,7 @@ namespace ScrapBot.Commands
             var appInfo = await context.Client.GetApplicationInfoAsync();
 
             return appInfo.Owner.Id != context.User.Id
-                ? CheckResult.Unsuccessful("This command is restricted to the Owner!")
+                ? CheckResult.Failed("This command is restricted to the Owner!")
                 : CheckResult.Successful;
         }
     }

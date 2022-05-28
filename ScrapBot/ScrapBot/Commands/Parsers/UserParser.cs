@@ -26,14 +26,14 @@ namespace ScrapBot.Commands
                     || (x as SocketGuildUser).Nickname.EqualsIgnoreCase(value)).ToList();
                 if (match.Count() > 1)
                 {
-                    return TypeParserResult<IUser>.Unsuccessful(
+                    return TypeParserResult<IUser>.Failed(
                         "Multiple users found, try mentioning the user or using their ID.");
                 }
 
                 user = match.FirstOrDefault();
             }
             return user is null
-                ? TypeParserResult<IUser>.Unsuccessful("User not found.")
+                ? TypeParserResult<IUser>.Failed("User not found.")
                 : TypeParserResult<IUser>.Successful(user);
         }
     }

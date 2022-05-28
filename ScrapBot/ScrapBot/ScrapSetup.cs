@@ -70,7 +70,7 @@ namespace ScrapBot
         {
             CommandService.AddTypeParser(new UserParser());
             CommandService.AddTypeParser(new TextChannelParser());
-            CommandService.AddTypeParser(new CommandParser());
+            CommandService.AddTypeParser(new CommandParser(Provider));
         }
 
         private IServiceProvider MakeProvider()
@@ -79,7 +79,8 @@ namespace ScrapBot
                 .AddSingleton(Client)
                 .AddSingleton(CommandService)
                 .AddSingleton(Config)
-                .AddSingleton(new InteractivityService(Client, TimeSpan.FromMinutes(2)))
+                .AddSingleton(new InteractivityService(Client,
+                    new InteractivityConfig() { DefaultTimeout = TimeSpan.FromMinutes(2) }))
                 .AddSingleton(ScrapClient);
 
             services.AddDbContext<ScrapDbContext>(options => options.UseNpgsql(Config.GetConnectionString("Remote")));

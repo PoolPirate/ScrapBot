@@ -17,6 +17,6 @@ namespace ScrapBot.Commands
         public override ValueTask<CheckResult> CheckAsync(ScrapContext context)
             => UserIds.Contains(context.User.Id)
                 ? CheckResult.Successful
-                : CheckResult.Unsuccessful("You do not have access to this command!");
+                : CheckResult.Failed("You do not have access to this command!");
     }
 }

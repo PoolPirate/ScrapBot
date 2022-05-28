@@ -24,14 +24,14 @@ namespace ScrapBot.Commands
                     x.Name.EqualsIgnoreCase(value));
                 if (match.Count() > 1)
                 {
-                    return TypeParserResult<ITextChannel>.Unsuccessful(
+                    return TypeParserResult<ITextChannel>.Failed(
                         "Multiple channels found, try mentioning the channel or using its ID.");
                 }
 
                 channel = match.FirstOrDefault();
             }
             return channel is null
-                ? TypeParserResult<ITextChannel>.Unsuccessful("User not found.")
+                ? TypeParserResult<ITextChannel>.Failed("User not found.")
                 : TypeParserResult<ITextChannel>.Successful(channel);
         }
     }
